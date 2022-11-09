@@ -3,9 +3,9 @@ from datetime import datetime
 
 
 class RegisterMatches(BaseModel):
-    water: int
-    balls: int
-    matches: int
+    water: float
+    balls: float
+    matches: float
     timestamp = datetime
 
 

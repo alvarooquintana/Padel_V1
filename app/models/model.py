@@ -5,7 +5,7 @@ from datetime import datetime
 
 class Match(Model):
     id: str = Field(primary_field=True)
-    water: int
-    balls: int
-    matches: int
+    water: float
+    balls: float
+    matches: float
     timestamp: Optional[datetime] = None

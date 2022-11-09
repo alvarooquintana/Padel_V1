@@ -1,6 +1,8 @@
 from fastapi import FastAPI,Request
+from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from db.db import engine
 from models.model import Match
 
@@ -9,6 +11,24 @@ from routers import matches
 app = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
+@app.get("/")
+async def index(request: Request):
+    matches = await engine.find(Match)
+    return templates.TemplateResponse("registro.html", {"request": request, "matches":matches})
+
+@app.get("/gastos")
+async def index(request: Request):
+    matches = await engine.find(Match)
+    table_data = []
+    for match in matches:
+        table_data.append(match)
+    return templates.TemplateResponse("gastos.html", {"request": request, "matches":matches, "table_data":table_data})
+
+
 
 origins = [
     "http://localhost:8000",
@@ -22,17 +42,5 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-
-@app.get("/")
-async def index(request: Request):
-    matches = await engine.find(Match)
-    return templates.TemplateResponse("index.html", {"request": request, "matches":matches})
-
-
-
-
-
 
 app.include_router(matches.router)

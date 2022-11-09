@@ -1,33 +1,30 @@
-from fastapi import APIRouter,Request
-from schemas.schema import RegisterMatches, MatchesResponse
+from fastapi import APIRouter,Form
+from fastapi.responses import RedirectResponse
 from models.model import Match
 from db.db import engine
 from datetime import datetime
-from fastapi.templating import Jinja2Templates
 import uuid
 
 
 router = APIRouter()
 
 
-@router.get("/matches")
+@router.get("/all_matches")
 async def get_matches():
     matches = await engine.find(Match)
-    return matches    
+    return matches
 
 
-@router.post("/matches", response_model=MatchesResponse)
-async def add_matches(create_match: RegisterMatches):
+@router.post("/matches")
+async def add_matches(balls: float = Form(),water:float = Form(),matches:float = Form()):
     register_matches = Match(
-        balls=create_match.balls,
-        water=create_match.water,
-        matches=create_match.matches,
+        balls=balls,
+        water=water,
+        matches=matches,
         id=uuid.uuid4().hex,
         timestamp=datetime.utcnow(),
     )
 
     await engine.save(register_matches)
+
     return register_matches
-
- 
-

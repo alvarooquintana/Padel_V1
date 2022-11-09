@@ -3,3 +3,4 @@ uvicorn
 pymongo
 motor
 odmantic
+python-multipart

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro Partidos</title>
+</head>
+<body>
+  <div class="login-box">
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    
+    <h2>PADEL</h2>
+    <form method="post" action="/matches">
+      <div class="user-box">
+        <input type="number" step="any" name="matches" required>
+        <label>Partidos</label>
+      </div>
+      <div class="user-box">
+        <input type="number" step="any"  name="balls" required>
+        <label>Bolas</label>
+      </div>
+      <div class="user-box">
+        <input type="number" step="any"  name="water" required>
+        <label>Agua</label>
+      </div>
+      <button type="submit">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Registrar!
+      </button>
+    </form>
+  </div>
+  
+</body>
+</html>
