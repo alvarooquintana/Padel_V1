@@ -1,4 +1,4 @@
-from fastapi import APIRouter,Form
+from fastapi import APIRouter,Form, status
 from fastapi.responses import RedirectResponse
 from models.model import Match
 from db.db import engine
@@ -27,4 +27,4 @@ async def add_matches(balls: float = Form(),water:float = Form(),matches:float =
 
     await engine.save(register_matches)
 
-    return register_matches
+    return RedirectResponse(url="/gastos", status_code=status.HTTP_302_FOUND)
