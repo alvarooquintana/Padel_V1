@@ -9,3 +9,9 @@ class Match(Model):
     balls: float
     matches: float
     timestamp: Optional[datetime] = None
+
+
+class User(Model):
+    id: str = Field(primary_field=True)
+    email: str 
+    password: str 

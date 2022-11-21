@@ -1,12 +1,30 @@
 from fastapi import APIRouter,Form, status
 from fastapi.responses import RedirectResponse
-from models.model import Match
+from models.model import Match,User
+from utils.hashed_password import get_hashed_password
 from db.db import engine
 from datetime import datetime
 import uuid
 
 
 router = APIRouter()
+
+
+@router.post("/register")
+async def register(email: str = Form(),password: str = Form()):
+    hash_password = get_hashed_password(password)
+    register_user = User(email=email,password=hash_password)
+    engine.save(register_user)
+    return register_user
+
+
+
+
+
+
+
+
+
 
 
 @router.get("/all_matches")

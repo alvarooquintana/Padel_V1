@@ -6,3 +6,4 @@ odmantic
 python-multipart
 python-dotenv
 jinja2
+passlib
