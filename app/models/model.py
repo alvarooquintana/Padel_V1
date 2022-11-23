@@ -13,5 +13,5 @@ class Match(Model):
 
 class User(Model):
     id: str = Field(primary_field=True)
-    email: str 
-    password: str 
+    email: str
+    password: str

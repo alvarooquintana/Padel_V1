@@ -11,4 +11,3 @@ class RegisterMatches(BaseModel):
 
 class MatchesResponse(BaseModel):
     timestamp = datetime
-    
