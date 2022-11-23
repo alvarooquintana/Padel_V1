@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Form, status
 from fastapi.responses import RedirectResponse
 from models.model import Match, User
-from utils.hashed_password import get_hashed_password
+from utils.hashed_password import get_hashed_password, verify_password
 from db.db import engine
 from datetime import datetime
 import uuid
@@ -17,6 +17,18 @@ async def register(email: str = Form(), password: str = Form()):
     await engine.save(register_user)
     return register_user
 
+
+@router.post("/login")
+async def login(email: str = Form(), plain_password: str = Form()):
+    user = await engine.find(User,User.email == email)
+    print(user)
+    if not verify_password(plain_password,user[0].password):
+        return False
+    else:
+        return RedirectResponse(url="/matches", status_code=status.HTTP_302_FOUND)
+
+
+    
 
 @router.get("/all_matches")
 async def get_matches():
