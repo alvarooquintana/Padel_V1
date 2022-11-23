@@ -50,6 +50,11 @@ async def index(request: Request, username: str = Depends(get_current_username))
         "registro.html", {"request": request, "matches": matches}
     )
 
+@app.get("login")
+async def login(request: Request):
+    return templates.TemplateResponse("login.html",{"request":request})
+    
+
 
 @app.get("/gastos")
 async def index(request: Request):
