@@ -13,22 +13,21 @@ router = APIRouter()
 @router.post("/register")
 async def register(email: str = Form(), password: str = Form()):
     hash_password = get_hashed_password(password)
-    register_user = User(id=uuid.uuid4().hex,email=email, password=hash_password)
+    register_user = User(id=uuid.uuid4().hex, email=email, password=hash_password)
     await engine.save(register_user)
     return register_user
 
 
 @router.post("/login")
 async def login(email: str = Form(), plain_password: str = Form()):
-    user = await engine.find(User,User.email == email)
+    user = await engine.find(User, User.email == email)
     print(user)
-    if not verify_password(plain_password,user[0].password):
+    if not verify_password(plain_password, user[0].password):
         return False
     else:
-        return RedirectResponse(url="/matches", status_code=status.HTTP_302_FOUND)
+        print("ok")
+        return RedirectResponse(url="/", status_code=status.HTTP_302_FOUND)
 
-
-    
 
 @router.get("/all_matches")
 async def get_matches():

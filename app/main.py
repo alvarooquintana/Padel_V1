@@ -21,6 +21,14 @@ templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
+
+
+load_dotenv()
+
+
+
+
+
 def get_current_username(credentials: HTTPBasicCredentials = Depends(security)):
     current_username_bytes = credentials.username
     correct_username_bytes = os.getenv("USUARIO")
@@ -41,6 +49,7 @@ def get_current_username(credentials: HTTPBasicCredentials = Depends(security)):
             headers={"WWW-Authenticate": "Basic"},
         )
     return credentials.username
+
 
 
 @app.get("/")
