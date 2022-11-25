@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, Depends, HTTPException, status
+from fastapi import FastAPI, Request, Depends, HTTPException, status,Form
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
@@ -8,7 +8,7 @@ from db.db import engine
 from models.model import Match
 from dotenv import load_dotenv
 
-
+import requests
 import secrets
 import os
 
@@ -59,11 +59,10 @@ async def index(request: Request, username: str = Depends(get_current_username))
         "registro.html", {"request": request, "matches": matches}
     )
 
-@app.get("login")
+@app.get("/login")
 async def login(request: Request):
-    return templates.TemplateResponse("login.html",{"request":request})
-    
 
+    return templates.TemplateResponse("login.html",{"request":request})
 
 @app.get("/gastos")
 async def index(request: Request):

@@ -20,13 +20,12 @@ async def register(email: str = Form(), password: str = Form()):
 
 @router.post("/login")
 async def login(email: str = Form(), plain_password: str = Form()):
-    user = await engine.find(User, User.email == email)
-    print(user)
-    if not verify_password(plain_password, user[0].password):
-        return False
-    else:
-        print("ok")
-        return RedirectResponse(url="/", status_code=status.HTTP_302_FOUND)
+    user = await engine.find(User)
+    if user[0].email == email:
+        if not verify_password(plain_password, user[0].password):
+            return status.HTTP_404_NOT_FOUND
+        else:
+            return RedirectResponse(url="/", status_code=status.HTTP_302_FOUND)
 
 
 @router.get("/all_matches")
