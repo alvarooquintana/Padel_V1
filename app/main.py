@@ -1,17 +1,11 @@
-from fastapi import FastAPI, Request, Depends, HTTPException, status, Form
+from fastapi import FastAPI, Request, status
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
-from fastapi.security import HTTPBasic, HTTPBasicCredentials
+from fastapi.security import HTTPBasic
 from fastapi.staticfiles import StaticFiles
 from db.db import engine
 from models.model import Match
-from dotenv import load_dotenv
-
-import requests
-import secrets
-import os
-
 from routers import matches
 
 app = FastAPI()
@@ -21,7 +15,6 @@ templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
-load_dotenv()
 
 
 
