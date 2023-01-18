@@ -2,7 +2,7 @@ from fastapi import APIRouter, Form, status
 from fastapi.responses import RedirectResponse
 from models.model import Match, User
 from utils.hashed_password import get_hashed_password, verify_password
-from db.db import engine
+from databases.database import engine
 from datetime import datetime
 import uuid
 

@@ -4,9 +4,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 from fastapi.security import HTTPBasic
 from fastapi.staticfiles import StaticFiles
-from db.db import engine
+
+from databases.database import engine
 from models.model import Match
 from routers import matches
+
 
 app = FastAPI()
 security = HTTPBasic()
