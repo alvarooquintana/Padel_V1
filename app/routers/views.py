@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request,status
+from fastapi import APIRouter, Request,status
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
@@ -6,17 +6,18 @@ from databases.database import engine
 from models.model import Match
 
 
-app = FastAPI()
+router = APIRouter()
 
 templates = Jinja2Templates(directory="templates")
-app.mount("/static", StaticFiles(directory="static"), name="static")
+
+router.mount("/static", StaticFiles(directory="static"), name="static")
 
 
-@app.get("/")
+@router.get("/")
 async def index():
     return RedirectResponse(url="login", status_code=status.HTTP_302_FOUND)
 
-@app.get("/registro")
+@router.get("/registro")
 async def index(request: Request):
     matches = await engine.find(Match)
     return templates.TemplateResponse(
@@ -24,13 +25,13 @@ async def index(request: Request):
     )
 
 
-@app.get("/login")
+@router.get("/login")
 async def login(request: Request):
 
     return templates.TemplateResponse("login.html", {"request": request})
 
 
-@app.get("/gastos")
+@router.get("/gastos")
 async def index(request: Request):
     matches = await engine.find(Match)
     table_data = []

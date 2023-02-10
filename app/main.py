@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import matches
+from fastapi.staticfiles import StaticFiles
+from routers import matches,views
 
 
 app = FastAPI(docs_url=None, redoc_url=None)
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 origins = ["http://localhost:8000", "http://127.0.0.1:8000"]
 
@@ -16,3 +18,5 @@ app.add_middleware(
 )
 
 app.include_router(matches.router)
+app.include_router(views.router)
+
