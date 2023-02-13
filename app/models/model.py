@@ -1,9 +1,15 @@
-from odmantic import Field, Model
+from odmantic import Field, Model,EmbeddedModel
 from typing import Optional
 from datetime import datetime
 
 
-class Match(Model):
+
+class User(Model):
+    id: str = Field(primary_field=True)
+    email: str
+    password: str
+
+class RegisterMatch(Model):
     id: str = Field(primary_field=True)
     water: float
     balls: float
@@ -11,7 +17,5 @@ class Match(Model):
     timestamp: Optional[datetime] = None
 
 
-class User(Model):
-    id: str = Field(primary_field=True)
-    email: str
-    password: str
+
+

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Form, status
 from fastapi.responses import RedirectResponse
-from models.model import Match, User
+from models.model import RegisterMatch,User
 from utils.hashed_password import get_hashed_password, verify_password
 from databases.database import engine
 from datetime import datetime
@@ -30,22 +30,27 @@ async def login(email: str = Form(), plain_password: str = Form()):
 
 @router.get("/all_matches")
 async def get_matches():
-    matches = await engine.find(Match)
+    matches = await engine.find(RegisterMatch)
     return matches
 
 
 @router.post("/matches")
 async def add_matches(
-    balls: float = Form(), water: float = Form(), matches: float = Form()
+     balls: float = Form(), water: float = Form(), matches: float = Form()
 ):
-    register_matches = Match(
+    now = datetime.utcnow().strftime("%Y-%m-%d %H:%M")
+    register_match = RegisterMatch(
         balls=balls,
         water=water,
         matches=matches,
         id=uuid.uuid4().hex,
-        timestamp=datetime.utcnow(),
+        timestamp=now,
     )
 
-    await engine.save(register_matches)
+    await engine.save(register_match)
 
     return RedirectResponse(url="/gastos", status_code=status.HTTP_302_FOUND)
+
+@router.post("/results")
+async def results():
+    pass

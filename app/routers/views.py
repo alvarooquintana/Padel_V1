@@ -3,7 +3,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 from databases.database import engine
-from models.model import Match
+from models.model import RegisterMatch
 
 
 router = APIRouter()
@@ -19,7 +19,7 @@ async def index():
 
 @router.get("/registro")
 async def index(request: Request):
-    matches = await engine.find(Match)
+    matches = await engine.find(RegisterMatch)
     return templates.TemplateResponse(
         "registro.html", {"request": request, "matches": matches}
     )
@@ -33,7 +33,7 @@ async def login(request: Request):
 
 @router.get("/gastos")
 async def index(request: Request):
-    matches = await engine.find(Match)
+    matches = await engine.find(RegisterMatch)
     table_data = []
     for match in matches:
         table_data.append(match)
