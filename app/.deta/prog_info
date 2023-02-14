@@ -1,0 +1,1 @@
+{"id":"42037862-d4b3-46e0-bb9f-26df48ea1c79","space":52465,"runtime":"python3.9","name":"app","path":"00q075","project":"a0jdr3xc","account":"144798365827","region":"eu-central-1","deps":["fastapi","uvicorn","pymongo","motor","odmantic","python-multipart","python-dotenv","jinja2","passlib","bcrypt"],"envs":null,"public":true,"log_level":"off","cron":""}
