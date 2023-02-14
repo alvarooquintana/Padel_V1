@@ -22,7 +22,7 @@ jobs:
 
       - name: "Deploy"
         env:
-          DETA_ACCESS_TOKEN: ${{secrets.DETA_ACCES_TOKEN}}
+          DETA_ACCESS_TOKEN: ${{ secrets.DETA_ACCESS_TOKEN }}
         run: /home/runner/.deta/bin/deta deploy
 
   
