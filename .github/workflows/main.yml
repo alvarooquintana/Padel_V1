@@ -20,7 +20,7 @@ jobs:
       - name: "Install deta"
         run: curl -fsSL https://get.deta.dev/space-cli.sh | sh
       
-      - name: Deta Space Deployment Github Action
+      - name: Deta Space Deployment 
         uses: neobrains/space-deployment-github-action@v0.3
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
