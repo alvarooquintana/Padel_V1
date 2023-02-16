@@ -5,3 +5,7 @@ micros:
     src: ./app
     engine: python3.9
     primary: true
+    presets:
+      env:
+      - name: MONGO_PASSWORD
+      - name: USER_DB

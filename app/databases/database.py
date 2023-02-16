@@ -6,10 +6,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-user_db = os.environ.get('USER_DB')
-password = os.getenv("MONGO_PASSWORD")
+user_db = os.getenv('USER_DB')
+password_db = os.getenv("MONGO_PASSWORD")
 
-client = AsyncIOMotorClient("mongodb+srv://alvaro-padelapp:a7gyfaxRHVgRSIiT@padelapp.ikvhpet.mongodb.net/test")
+client = AsyncIOMotorClient(f"mongodb+srv://{user_db}:{password_db}@padelapp.ikvhpet.mongodb.net/test")
 
 
 engine = AIOEngine(client=client)
