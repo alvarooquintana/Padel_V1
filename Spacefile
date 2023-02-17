@@ -1,11 +1,11 @@
 # Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
 v: 0
+app_name: app
 micros:
   - name: app
     src: ./app
     engine: python3.9
     primary: true
-    app_name: app
     presets:
       env:
       - name: MONGO_PASSWORD
