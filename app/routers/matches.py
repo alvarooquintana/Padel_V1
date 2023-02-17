@@ -26,6 +26,10 @@ async def login(email: str = Form(), plain_password: str = Form()):
             return status.HTTP_404_NOT_FOUND
         else:
             return RedirectResponse(url="/registro", status_code=status.HTTP_302_FOUND)
+    else:
+        return RedirectResponse(url="/login",status_code=status.HTTP_302_FOUND)
+
+        
 
 
 @router.get("/all_matches")
