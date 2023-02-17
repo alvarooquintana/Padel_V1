@@ -25,7 +25,9 @@ async def login(email: str = Form(), plain_password: str = Form()):
         if not verify_password(plain_password, user[0].password):
             return RedirectResponse(url="/login", status_code=status.HTTP_302_FOUND) 
         else:
-            return RedirectResponse(url="/registro", status_code=status.HTTP_302_FOUND) 
+            return RedirectResponse(url="/registro", status_code=status.HTTP_302_FOUND)
+    else:
+        return RedirectResponse(url="/login", status_code=status.HTTP_302_FOUND) 
 
 
         
