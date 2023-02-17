@@ -5,6 +5,7 @@ micros:
     src: ./app
     engine: python3.9
     primary: true
+    app_name: app
     presets:
       env:
       - name: MONGO_PASSWORD
