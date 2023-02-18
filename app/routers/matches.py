@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Form, status
 from fastapi.responses import RedirectResponse
 from models.model import RegisterMatch,User
-from utils.hashed_password import get_hashed_password, verify_password
+from utils.utils import get_hashed_password, verify_password,find_user_by_email
 from databases.database import engine
 from datetime import datetime
 import uuid
@@ -20,9 +20,9 @@ async def register(email: str = Form(), password: str = Form()):
 
 @router.post("/login")
 async def login(email: str = Form(), plain_password: str = Form()):
-    user = await engine.find(User)
-    if user[0].email == email:
-        if not verify_password(plain_password, user[0].password):
+    user = await find_user_by_email(email)
+    if user:
+        if not verify_password(plain_password, user.password):
             return RedirectResponse(url="/login", status_code=status.HTTP_302_FOUND) 
         else:
             return RedirectResponse(url="/registro", status_code=status.HTTP_302_FOUND)
