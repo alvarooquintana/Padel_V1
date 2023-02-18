@@ -13,12 +13,9 @@
     <title>Gastos</title>
 </head>
 <body>
-    
-
     <div class="container">
         <table>
-            <thead>
-                
+            <thead>              
                 <tr>
                     <th>Partidos</th>
                     <th>Bolas</th>
@@ -34,7 +31,7 @@
                     <td>{{match.balls}}</td>
                     <td>{{match.water}}</td>
                     <td>{{match.timestamp}}</td>
-                    <td>{{match.matches + match.balls + match.water}} €</td>
+                    <td>{{match.price.balls_price + match.price.matches_price + match.price.water_price}} €</td>
 
                 </tr>
                 {% endfor %}

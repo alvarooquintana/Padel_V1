@@ -5,10 +5,19 @@ from utils.utils import get_hashed_password, verify_password,find_user_by_email
 from databases.database import engine
 from datetime import datetime
 import uuid
+import json
 
 
 router = APIRouter()
 
+
+ 
+prices = {
+            "balls_price": 2.50,
+            "water_price":1.00,
+            "matches_price":5.00
+}
+    
 
 @router.post("/register")
 async def register(email: str = Form(), password: str = Form()):
@@ -41,13 +50,16 @@ async def get_matches():
 
 @router.post("/matches")
 async def add_matches(
-     balls: float = Form(), water: float = Form(), matches: float = Form()
+    balls: float = Form(), water: float = Form(), matches: float = Form()
 ):
+
+
     now = datetime.utcnow().strftime("%Y-%m-%d %H:%M")
     register_match = RegisterMatch(
         balls=balls,
         water=water,
         matches=matches,
+        price=prices,
         id=uuid.uuid4().hex,
         timestamp=now,
     )
