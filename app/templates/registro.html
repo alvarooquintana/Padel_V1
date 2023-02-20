@@ -33,8 +33,22 @@
         <span></span>
         <span></span>
         <span></span>
-        Registrar!
+        Añadir gastos!
       </button>
+      <button type="button" id="redirect-button">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Ir a los gastos!
+      </button>
+      
+      <script>
+        document.getElementById("redirect-button").addEventListener("click", function() {
+          window.location.href = "/gastos";
+        });
+      </script>
+     
      
     </form>
   </div>
