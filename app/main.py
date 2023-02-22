@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from routers import matches,views
+from routers import matches, views
 
 #docs_url=None, redoc_url=None
 app = FastAPI()
@@ -19,4 +19,3 @@ app.add_middleware(
 
 app.include_router(matches.router)
 app.include_router(views.router)
-
