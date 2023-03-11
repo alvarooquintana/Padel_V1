@@ -32,8 +32,15 @@
                     <td>{{match.balls}}</td>
                     <td>{{match.water}}</td>
                     <td>{{match.timestamp}}</td>
-                    <td>{{match.price.balls_price + match.price.matches_price + match.price.water_price}} €</td>
+                    {% if match.price.balls_price > 1 and match.price.water_price > 1  and match.price.matches_price > 1  %}
+                        <td>{{match.price.balls_price + match.price.matches_price + match.price.water_price}} € </td>
 
+                    {% elif match.price.balls_price < 1 and match.price.water_price < 1 %}
+                        <td>{{match.price.matches_price}} € </td>
+
+                    {% elif match.price.balls_price > 1 and match.price.water_price < 1 %}
+                        <td>{{match.price.matches_price + match.price.balls_price}} € </td>       
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>
