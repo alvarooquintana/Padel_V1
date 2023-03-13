@@ -57,6 +57,4 @@ async def add_matches(
     return RedirectResponse(url="/gastos", status_code=status.HTTP_302_FOUND)
 
 
-@router.post("/results")
-async def results():
-    pass
+
