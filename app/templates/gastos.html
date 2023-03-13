@@ -32,15 +32,19 @@
                     <td>{{match.balls}}</td>
                     <td>{{match.water}}</td>
                     <td>{{match.timestamp}}</td>
-                    {% if match.price.balls_price > 1 and match.price.water_price > 1  and match.price.matches_price > 1  %}
-                        <td>{{match.price.balls_price + match.price.matches_price + match.price.water_price}} € </td>
-
-                    {% elif match.price.balls_price < 1 and match.price.water_price < 1 %}
-                        <td>{{match.price.matches_price}} € </td>
-
-                    {% elif match.price.balls_price > 1 and match.price.water_price < 1 %}
-                        <td>{{match.price.matches_price + match.price.balls_price}} € </td>       
+                    {% if match.matches > 0  and match.water > 0 and match.balls >  0  %}
+                        <td>{{match.price.matches_price + match.price.balls_price + match.price.water_price}} € </td>
+                    {% elif match.matches > 0 and match.water == 0 and match.balls == 0  %}
+                        <td>{{match.price.matches_price }} €</td>
+                    {% elif match.matches > 0 and match.water == 0 and match.balls > 0   %}
+                        <td> {{match.price.matches_price  +  match.price.balls_price}} €</td>
+                    {% elif match.matches > 0 and match.balls == 0 and match.water > 0   %}
+                        <td>{{match.price.matches_price  +  match.price.water_price}} €</td>
+                    {% else %}
+                        <td> Error € </td>
                     {% endif %}
+                    
+
                 </tr>
                 {% endfor %}
             </tbody>
