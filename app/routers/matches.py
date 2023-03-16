@@ -41,7 +41,7 @@ async def get_matches():
 async def add_matches(
     balls: float = Form(), water: float = Form(), matches: float = Form()
 ):
-    prices = {"balls_price": 2.50, "water_price": 1.00, "matches_price": 5.00}
+    prices = {"balls_price": 1.25, "water_price": 1.00, "matches_price": 5.00}
     now = datetime.utcnow().strftime("%Y-%m-%d %H:%M")
     register_match = RegisterMatch(
         balls=balls,
